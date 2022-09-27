@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,4 +59,4 @@ jobs:
           app-name: 'nfcu-angular-app'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8614C0E0AD6C45448CA00E1E6B5A3045 }}
-          package: .
+          package: dist
