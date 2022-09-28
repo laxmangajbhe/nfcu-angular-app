@@ -60,3 +60,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8614C0E0AD6C45448CA00E1E6B5A3045 }}
           package: .
+
+      - name: Delete zip file
+        run: delete angular.zip
