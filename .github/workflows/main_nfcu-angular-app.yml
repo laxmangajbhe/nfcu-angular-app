@@ -62,4 +62,4 @@ jobs:
           package: .
 
       - name: Delete zip file
-        run: delete angular.zip
+        run: del angular.zip
