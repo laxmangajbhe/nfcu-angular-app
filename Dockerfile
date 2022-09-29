@@ -24,5 +24,7 @@ RUN npm run build
 EXPOSE 80
 EXPOSE 443
 
+FROM nginx:alpine
+COPY --from=node /app/dist/nfcu-angular-app /usr/share/nginx/html
 # start app
-CMD ng serve --host 0.0.0.0
+#CMD ng serve --host 0.0.0.0
