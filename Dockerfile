@@ -1,8 +1,8 @@
 #Download Node Alpine image
-FROM node:alpine As build
+FROM node:16
 
 #Setup the working directory
-WORKDIR /usr/src/ng-app
+WORKDIR /app
 
 #Copy package.json
 COPY package.json package-lock.json ./
@@ -11,13 +11,13 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 #Copy other files and folder to working directory
-COPY . .
+COPY dist /app
 
 #Build Angular application in PROD mode
 RUN npm run build
 
-#Download NGINX Image
-FROM nginx:1.15.8-alpine
+EXPOSE 80
+EXPOSE 443
 
-#Copy built angular files to NGINX HTML folder
-#COPY --from=build /usr/src/ng-app/dist/pokemon-app/ /usr/share/nginx/html
+# start app
+CMD ng serve --host 0.0.0.0
