@@ -20,4 +20,4 @@ RUN npm run build
 FROM nginx:1.15.8-alpine
 
 #Copy built angular files to NGINX HTML folder
-COPY --from=build /usr/src/ng-app/dist/pokemon-app/ /usr/share/nginx/html
+#COPY --from=build /usr/src/ng-app/dist/pokemon-app/ /usr/share/nginx/html
