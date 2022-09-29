@@ -11,7 +11,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 #Copy other files and folder to working directory
-COPY dist /app
+COPY . /app
 
 #Build Angular application in PROD mode
 RUN npm run build
