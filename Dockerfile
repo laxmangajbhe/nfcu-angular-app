@@ -1,8 +1,8 @@
 #Download Node Alpine image
-FROM node:16
+FROM node:alpine
 
 #Setup the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 #Copy package.json
 COPY package.json package-lock.json ./
@@ -10,21 +10,21 @@ COPY package.json package-lock.json ./
 #Install dependencies
 RUN npm install
 
-RUN npm install -g @angular/cli@7.3.9
+RUN npm install -g @angular/cli
 
 #Copy other files and folder to working directory
-COPY . /app
+COPY . .
 
 # generate build
-RUN ng build --output-path=dist
+RUN ng build --output-path=dist/nfcu-angular-app
 
 #Build Angular application in PROD mode
-RUN npm run build
+#RUN npm run build
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 4200
 
-FROM nginx:alpine
-COPY --from=node /app/dist/nfcu-angular-app /usr/share/nginx/html
+#FROM nginx:alpine
+#COPY --from=node /app/dist/nfcu-angular-app /usr/share/nginx/html
 # start app
-#CMD ng serve --host 0.0.0.0
+WORKDIR /usr/src/app/dist/nfcu-angular-app
+CMD ng serve --host 0.0.0.0
