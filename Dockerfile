@@ -21,10 +21,10 @@ RUN ng build --output-path=dist/nfcu-angular-app
 #Build Angular application in PROD mode
 #RUN npm run build
 
-EXPOSE 4200
+#EXPOSE 80
 
 #FROM nginx:alpine
 #COPY --from=node /app/dist/nfcu-angular-app /usr/share/nginx/html
 # start app
 WORKDIR /usr/src/app/dist/nfcu-angular-app
-CMD ng serve --host 0.0.0.0
+CMD ng serve --host 0.0.0.0 --port 80
