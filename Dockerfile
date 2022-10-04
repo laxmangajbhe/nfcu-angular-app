@@ -21,10 +21,25 @@ RUN ng build --output-path=dist/nfcu-angular-app
 #Build Angular application in PROD mode
 #RUN npm run build
 
-EXPOSE 4200
+#EXPOSE 4200
 
-#FROM nginx:alpine
-#COPY --from=node /app/dist/nfcu-angular-app /usr/share/nginx/html
-# start app
-WORKDIR /usr/src/app/dist/nfcu-angular-app
-CMD ng serve --host 0.0.0.0 
+# Second Stage Without NGINX
+ 
+#WORKDIR /usr/src/app/dist/nfcu-angular-app
+#CMD ng serve --host 0.0.0.0 
+
+# Container App
+# Second Stage (With NGINX)
+
+# nginx state for serving content
+FROM nginx:alpine
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=builder /app/dist/angular-nginx-docker .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+
