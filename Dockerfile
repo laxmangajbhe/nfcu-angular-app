@@ -1,5 +1,5 @@
 #Download Node Alpine image
-FROM node:alpine
+FROM node:alpine as builder
 
 #Setup the working directory
 WORKDIR /usr/src/app
